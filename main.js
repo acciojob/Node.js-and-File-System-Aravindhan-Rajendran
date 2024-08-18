@@ -32,7 +32,6 @@ const removeWordFromFile = (filename, word) => {
 // Prompt the user for the filename and word to remove
 rl.question('Enter the filename: ', (filename) => {
   rl.question('Enter the word to remove: ', (word) => {
-    // Call the function to remove the word from the file
     removeWordFromFile(filename, word);
     rl.close();
   });
