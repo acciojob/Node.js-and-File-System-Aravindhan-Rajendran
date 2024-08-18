@@ -16,13 +16,13 @@ const removeWordFromFile = (filename, word) => {
     }
 
     // Remove all occurrences of the specified word
-    const updatedContent = data.split(word).join('');
+    const updatedContent = data.replace(new RegExp(`\\b${word}\\b`, 'g'), '');
 
     // Write the modified content back to the file
     fs.writeFile(filename, updatedContent, 'utf8', (err) => {
       if (err) {
-        console.error(`Error writing to file: ${err.message}`);
-        return;
+        console.error(`Error reading file: ${err.message}`);
+        throw err;
       }
       console.log(`All occurrences of "${word}" have been removed from ${filename}`);
     });
