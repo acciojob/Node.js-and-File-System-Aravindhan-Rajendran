@@ -9,7 +9,6 @@ const rl = readline.createInterface({
 
 // Function to remove the specified word from the file
 const removeWordFromFile = (filename, word) => {
-  // Read the file content
   fs.readFile(filename, 'utf8', (err, data) => {
     if (err) {
       console.error(`Error reading file: ${err.message}`);
