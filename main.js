@@ -9,22 +9,25 @@ const rl = readline.createInterface({
 
 // Function to remove the specified word from the file
 const removeWordFromFile = (filename, word) => {
-  fs.readFile(filename, 'utf8', (err, data) => {
-    if (err) {
-      console.error(`Error reading file: ${err.message}`);
-      return;
-    }
-
-    // Remove all occurrences of the specified word
-    const updatedContent = data.replace(new RegExp(`\\b${word}\\b`, 'g'), '');
-
-    // Write the modified content back to the file
-    fs.writeFile(filename, updatedContent, 'utf8', (err) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, 'utf8', (err, data) => {
       if (err) {
         console.error(`Error reading file: ${err.message}`);
-        throw err;
+        reject(err);
       }
-      console.log(`All occurrences of "${word}" have been removed from ${filename}`);
+
+      // Remove all occurrences of the specified word
+      const updatedContent = data.replace(new RegExp(`\\b${word}\\b`, 'g'), '');
+
+      // Write the modified content back to the file
+      fs.writeFile(filename, updatedContent, 'utf8', (err) => {
+        if (err) {
+          console.error(`Error reading file: ${err.message}`);
+          reject(err);
+        }
+        console.log(`All occurrences of "${word}" have been removed from ${filename}`);
+        resolve();
+      });
     });
   });
 };
